@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ocifabric"
+version = "0.1.0"
+description = "OCI Object Storage to Microsoft Fabric Lakehouse: incremental, idempotent, quality-gated ingestion"
+requires-python = ">=3.10"
+authors = [{ name = "Lucas Wall" }]
+dependencies = []
+
+[project.optional-dependencies]
+oci = ["oci>=2.120"]
+dev = ["pytest>=8", "duckdb>=1.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
