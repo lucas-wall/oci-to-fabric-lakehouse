@@ -14,12 +14,13 @@ flowchart LR
 ```
 
 ## Stack
-`OCI Object Storage` · `Microsoft Fabric` (Lakehouse, Notebooks, OneLake) · `PySpark` · `Delta Lake` · `Azure Key Vault` · `DuckDB` · `pytest` · `GitHub Actions`
+`OCI Object Storage` · `Microsoft Fabric` (Lakehouse, Notebooks, OneLake) · `PySpark` · `Delta Lake` · `Parquet` · `Azure Key Vault` · `DuckDB` · `pytest` · `GitHub Actions` · `Azure DevOps`
 
 ## What it handles
 - **Incremental loads:** watermark with a lookback window, so files that land late are still picked up
 - **Crash-safe:** the watermark is saved only after every file lands, so a failed run simply re-runs
 - **Data quality:** null IDs, bad amounts, invalid statuses and malformed timestamps go to quarantine with the failing rule, the rest keeps flowing
+- **Traceability and reprocessing:** every quarantined row keeps the failing rule and a timestamp, and any batch can be replayed safely
 - **Duplicates and out-of-order events:** collapse to the newest state per booking
 - **Idempotent MERGE:** stale events never overwrite newer ones
 - **Secrets:** OCI credentials read from Azure Key Vault at runtime, never in code
